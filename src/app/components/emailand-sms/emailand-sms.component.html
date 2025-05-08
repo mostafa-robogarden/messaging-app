@@ -1,0 +1,46 @@
+<div class="container">
+  <h2>Send Email</h2>
+  <form #emailForm="ngForm" (ngSubmit)="onSendEmail()">
+    <label>
+      To
+      <input name="to" type="email" required [(ngModel)]="email.to" />
+    </label>
+    <label>
+      Subject
+      <input name="subject" required [(ngModel)]="email.subject" />
+    </label>
+    <label>
+      Message
+      <textarea name="body" rows="4" required [(ngModel)]="email.body"></textarea>
+    </label>
+    <div>
+      <label for="emailAttachment">Attachment</label>
+      <input
+        id="emailAttachment"
+        name="attachment"
+        type="file"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+    <button type="submit" [disabled]="emailForm.invalid">Send Email</button>
+  </form>
+  <p *ngIf="emailSuccess" class="success">✔ Email sent!</p>
+  <p *ngIf="emailError"   class="error">⚠ {{ emailError }}</p>
+
+  <hr />
+
+  <h2>Send SMS</h2>
+  <form #smsForm="ngForm" (ngSubmit)="onSendSms()">
+    <label>
+      Phone Number
+      <input name="to" type="tel" required [(ngModel)]="sms.to" />
+    </label>
+    <label>
+      Message
+      <textarea name="body" rows="3" required [(ngModel)]="sms.body"></textarea>
+    </label>
+    <button type="submit" [disabled]="smsForm.invalid">Send SMS</button>
+  </form>
+  <p *ngIf="smsSuccess" class="success">✔ SMS sent!</p>
+  <p *ngIf="smsError"   class="error">⚠ {{ smsError }}</p>
+</div>
